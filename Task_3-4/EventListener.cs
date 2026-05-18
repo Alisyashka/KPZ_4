@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Task_3_4
+﻿namespace Task_3_4
 {
-    internal class EventListener
+    public class EventListener : IEventListener
     {
+        private readonly Action action;
+
+        public EventListener(Action action)
+        {
+            this.action = action;
+        }
+
+        public void Update()
+        {
+            action();
+        }
     }
 }

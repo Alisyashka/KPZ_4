@@ -1,4 +1,4 @@
-﻿namespace Task_5
+﻿namespace Task_3_4
 {
     public abstract class LightNode
     {
