@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Task_5
+namespace Task_3_4
 {
     public class LightElementNode : LightNode
     {
@@ -11,8 +11,7 @@ namespace Task_5
         private List<string> classes = new List<string>();
         private List<LightNode> children = new List<LightNode>();
 
-        private Dictionary<string, List<Action>> events =
-            new Dictionary<string, List<Action>>();
+        private EventManager eventManager = new EventManager();
 
         public LightElementNode(string tagName, string displayType, string closingType)
         {
@@ -31,34 +30,14 @@ namespace Task_5
             children.Add(node);
         }
 
-        public int ChildCount()
-        {
-            return children.Count;
-        }
-
         public void AddEventListener(string eventName, Action handler)
         {
-            if (!events.ContainsKey(eventName))
-            {
-                events[eventName] = new List<Action>();
-            }
-
-            events[eventName].Add(handler);
+            eventManager.Subscribe(eventName, new EventListener(handler));
         }
 
         public void TriggerEvent(string eventName)
         {
-            if (events.ContainsKey(eventName))
-            {
-                foreach (var handler in events[eventName])
-                {
-                    handler();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Event not found: " + eventName);
-            }
+            eventManager.Notify(eventName);
         }
 
         private string GetClasses()

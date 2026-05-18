@@ -1,4 +1,4 @@
-﻿namespace Task_5
+﻿namespace Task_3_4
 {
     internal class Program
     {
@@ -15,27 +15,29 @@
                 Console.WriteLine("Button clicked!");
             });
 
-            button.AddEventListener("click", () =>
-            {
-                Console.WriteLine("Second click handler!");
-            });
-
-            button.AddEventListener("mouseover", () =>
-            {
-                Console.WriteLine("Mouse over button!");
-            });
-
             Console.WriteLine("HTML:");
             Console.WriteLine(button.OuterHTML());
 
             Console.WriteLine("\nTrigger click:");
             button.TriggerEvent("click");
 
-            Console.WriteLine("\nTrigger mouseover:");
-            button.TriggerEvent("mouseover");
 
-            Console.WriteLine("\nTrigger keydown:");
-            button.TriggerEvent("keydown");
+
+            Console.WriteLine("\n--- IMAGE TEST ---");
+
+            LightImageNode localImage =
+                new LightImageNode("images/photo.png");
+
+            LightImageNode webImage =
+                new LightImageNode("https://example.com/image.jpg");
+
+            Console.WriteLine(localImage.OuterHTML());
+            Console.WriteLine(localImage.LoadImage());
+
+            Console.WriteLine();
+
+            Console.WriteLine(webImage.OuterHTML());
+            Console.WriteLine(webImage.LoadImage());
         }
     }
 }
